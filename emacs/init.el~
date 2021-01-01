@@ -1,0 +1,29 @@
+;; Package Configuration
+(package-initialize)
+(setq use-package-always-ensure t)
+
+(unless (assoc-default "melpa" package-archives)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t))
+(unless (assoc-default "org" package-archives)
+  (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t))
+
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+;; General
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+
+;; Easy navigation to this file.
+(defun my/init-file ()
+  (interactive)
+  (find-file user-init-file))
+(defun my/init-file-reload ()
+  (interactive)
+  (load-file user-init-file))
+
+(tool-bar-mode -1)
+(display-time-mode 1)
+
+;; Interactive Completion
+(use-package helm
+  :ensure t)
